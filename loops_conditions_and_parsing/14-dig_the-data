@@ -1,0 +1,4 @@
+#!/usr/bin/env bash
+# Script to group Apache log visitors by IP and HTTP status code
+
+awk '{count[$1" "$9]++} END {for (i in count) print count[i], i}' /path/to/apache.log | sort -nr
