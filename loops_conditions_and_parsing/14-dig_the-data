@@ -1,5 +1,5 @@
 #!/usr/bin/env bash
-# Group visitors by IP and HTTP status code, then sort by occurrences
+# This script counts IP and HTTP code occurrences in the Apache log
+# Usage: ./14-dig_the-data <apache_log_file>
 
-awk '{print $1, $9}' access.log | sort | uniq -c | sort -nr | awk '{print $1, $2, $3}'
-
+awk '{count[$1" "$9]++} END {for (key in count) print count[key], key}' "$1" | sort -nr
