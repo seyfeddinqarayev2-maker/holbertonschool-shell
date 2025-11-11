@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
-# Script to tell the story of /etc/passwd
+# Display formatted info about users from /etc/passwd
 
-while IFS=: read -r username password uid gid full home shell; do
-    echo "The user $username is part of the $gid gang, lives in $home and rides $shell. $uid's place is protected by the passcode PASSWORD, more info about the user here: $uid INFO"
+while IFS=":" read -r username password userid groupid info home shell
+do
+  echo "The user $username is part of the $groupid gang, lives in $home and rides $shell. $userid's place is protected by the passcode $password, more info about the user here: $info"
 done < /etc/passwd
-
