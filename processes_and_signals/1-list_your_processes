@@ -1,4 +1,6 @@
 #!/usr/bin/env bash
-# This script displays all running processes in a user-oriented hierarchical format
+# Bu skript bütün işləyən prosesləri, bütün istifadəçilər üçün,
+# istifadəçi yönümlü və iyerarxik şəkildə göstərir
 
-ps -ejH
+ps auxf
+
