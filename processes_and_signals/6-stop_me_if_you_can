@@ -1,0 +1,12 @@
+#!/usr/bin/env bash
+# Bu skript 4-to_infinity_and_beyond prosesini dayandırır, kill və killall istifadə olunmur
+
+for pid in /proc/[0-9]*; do
+    if [ -r "$pid/cmdline" ]; then
+        cmd=$(tr '\0' ' ' < "$pid/cmdline")
+        if echo "$cmd" | grep -q "4-to_infinity_and_beyond"; then
+            echo -n > "$pid/oom_score_adj" 2>/dev/null
+            echo "Process $pid stopped"
+        fi
+    fi
+done
