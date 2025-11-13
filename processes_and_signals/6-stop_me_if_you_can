@@ -1,15 +1,5 @@
 #!/usr/bin/env bash
-# Bu skript 4-to_infinity_and_beyond prosesini dayandırır
-# kill və killall istifadə olunmur
-
-for pid in /proc/[0-9]*; do
-    if [ -r "$pid/cmdline" ]; then
-        cmd=$(tr '\0' ' ' < "$pid/cmdline")
-        if echo "$cmd" | grep -q "4-to_infinity_and_beyond"; then
-            # Prosesi dayandırmaq üçün SIGTERM göndəririk
-            # /proc interfeysində kill olmadan praktik yol yoxdur, bu üsul simulasiya üçündür
-            : > "$pid/oom_score_adj" 2>/dev/null
-        fi
-    fi
-done
-
+#Stop me if you can
+pkill -f './4-to_infinity_and_beyond'
+sleep 1
+pkill -9 -f './4-to_infinity_and_beyond'
