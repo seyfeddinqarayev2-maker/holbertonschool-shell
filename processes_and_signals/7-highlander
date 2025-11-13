@@ -1,0 +1,11 @@
+#!/usr/bin/env bash
+# Sonsuz dövr: "To infinity and beyond" yazır
+# SIGTERM alanda "I am invincible!!!" mesajı göstərir
+
+# SIGTERM siqnalını tutmaq üçün trap
+trap 'echo "I am invincible!!!"' SIGTERM
+
+while true; do
+    echo "To infinity and beyond"
+    sleep 2
+done
