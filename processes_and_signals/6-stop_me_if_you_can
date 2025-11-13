@@ -1,3 +1,3 @@
 #!/usr/bin/env bash
 #Stop me if you can
-pkill  -9 "./4-to_infinity_and_beyond"
+pkill  -19 "./4-to_infinity_and_beyond"
