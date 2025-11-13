@@ -1,4 +1,2 @@
 #!/usr/bin/env bash
-# Bu skript 7-highlander prosesini dayandırır
-
 kill "$(pgrep -f 7-highlander)"
