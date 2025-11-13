@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# Bu skript sonsuz dövrdə "To infinity and beyond" yazır, hər 2 saniyədən bir
+
+while true
+do
+    echo "To infinity and beyond"
+    sleep 2
+done
