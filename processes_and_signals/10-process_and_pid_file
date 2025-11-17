@@ -1,19 +1,11 @@
 #!/usr/bin/env bash
 # Bu skript PID faylı yaradır, sonsuz dövrdə mesaj yazır
 # və müxtəlif siqnallara fərqli mesajlarla cavab verir.
-
 PID_FILE="/var/run/myscript.pid"
-
-# PID faylını yarat
-echo $$ > "$PID_FILE"
-
-# Siqnalları idarə etmək üçün trap
 trap 'echo "I hate the kill command"; rm -f "$PID_FILE"; exit' SIGTERM
 trap 'echo "Y U no love me?!";' SIGINT
 trap 'rm -f "$PID_FILE"; exit' SIGQUIT
-
-# Sonsuz dövr
-while true; do
-    echo "To infinity and beyond"
-    sleep 2
+pgrep -f "./10-process-and-pid-file"
+echo "To infinity and beyond"
+sleep 1
 done

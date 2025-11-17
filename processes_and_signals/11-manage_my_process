@@ -1,37 +1,33 @@
 #!/usr/bin/env bash
-# Init script for manage_my_process
-
-PID_FILE="/var/run/my_process.pid"
+# This task has a problem
 PROCESS="./manage_my_process"
+PID_FILE="/var/run/my_process.pid"
+PID_FILE_TEMP="/tmp/my_process.pid"
+ start)
+    if [ -f "$PID_FILE" ]; then
+       echo "Proccess is already running"
+    fi
 
-case "$1" in
-  start)
-    # Start the process
     $PROCESS &
-    echo $! > "$PID_FILE"
+    echo $! > "$PID_FILE_TEMP"
+    mv "$PID_FILE_TEMP" "$PID_FILE"
     echo "manage_my_process started"
-    ;;
-  
+  ;;
   stop)
-    if [ -f "$PID_FILE" ]; then
-        kill "$(cat $PID_FILE)"
-        rm -f "$PID_FILE"
-    fi
-    echo "manage_my_process is not running"
-    
-    ;;
-  
+    kill "$(cat $PID_FILE)"
+    rm -f "$PID_FILE"
+    echo "manage_my_process stopped"
+  ;;
   restart)
-    if [ -f "$PID_FILE" ]; then
-        kill "$(cat $PID_FILE)"
-        rm -f "$PID_FILE"
-    fi
-    $PROCESS &
-    echo $! > "$PID_FILE"
+    kill "$(cat $PID_FILE)"
+    mv "$PID_FILE" "$PID_FILE_TEMP"
     echo "manage_my_process restarted"
-    ;;
-  
+    sleep 1
+    $PROCESS &
+    echo $! > "$PID_FILE_TEMP"
+    mv "$PID_FILE_TEMP" "$PID_FILE"
+  ;;
   *)
     echo "Usage: manage_my_process {start|stop|restart}"
-    ;;
+  ;;
 esac
